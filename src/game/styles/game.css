@@ -1,0 +1,263 @@
+.miwa-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background:
+    radial-gradient(circle at 12% 18%, #ffffff 0%, #ffffff00 38%),
+    radial-gradient(circle at 88% 80%, #dbffea 0%, #dbffea00 44%),
+    linear-gradient(135deg, #e6f5ec, #d6ebe1);
+}
+
+.miwa-card {
+  width: min(1320px, 100%);
+  background: linear-gradient(180deg, #ffffffef 0%, #f3fff7eb 100%);
+  backdrop-filter: blur(6px);
+  border: 1px solid #9cc7b1;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 24px 64px -32px #2e6a48;
+}
+
+.miwa-card h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.miwa-subtitle {
+  margin-top: 4px;
+  color: #4e5e57;
+}
+
+.miwa-scene-shell {
+  position: relative;
+  margin-top: 14px;
+  background: linear-gradient(135deg, #f8fffa, #e5f5ec);
+  border: 1px solid #b4dbc7;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: inset 0 1px 0 #ffffffcc;
+}
+
+.miwa-scene {
+  width: 100%;
+  height: auto;
+  border: 1px solid #8fbfa8;
+  border-radius: 12px;
+  background: #e9f8f1;
+  display: block;
+  cursor: pointer;
+  outline: none;
+  box-shadow: inset 0 0 0 1px #ffffffaa, 0 8px 24px -14px #2e6a48;
+}
+
+.miwa-scene:focus {
+  box-shadow: 0 0 0 3px #8fd5ad, inset 0 0 0 1px #ffffffaa;
+}
+
+.miwa-scene-help {
+  margin: 8px 2px 0;
+  color: #3f5d52;
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.miwa-stats {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.miwa-stats > div {
+  background: #ffffff1a;
+  backdrop-filter: blur(4px);
+  border: 1px solid #ffffff66;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.miwa-progress-bar {
+  margin-top: 14px;
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: #ffffff22;
+  border: 1px solid #ffffff66;
+  overflow: hidden;
+}
+
+.miwa-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2b9a66, #74cc8f);
+  transition: width 0.2s ease;
+}
+
+.miwa-event {
+  margin-top: 16px;
+  min-height: 52px;
+  background: #fff8db;
+  border: 1px solid #e9d997;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.miwa-controls {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.miwa-controls-wrap {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.miwa-controls-label {
+  margin: 0 0 8px;
+  color: #274f39;
+  font-weight: 700;
+}
+
+.miwa-move-controls {
+  background: #e7f5ec;
+  border: 1px solid #a9ceb9;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.miwa-dpad {
+  width: 164px;
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(3, 44px);
+  gap: 6px;
+}
+
+.miwa-horizontal-move {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.miwa-scene-choices {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, 90vw);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 12px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.miwa-scene-choices button {
+  border: 1px solid #ffffffb0;
+  border-radius: 10px;
+  background: #ffffff14;
+  color: #f4fbff;
+  padding: 8px 10px;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(1px);
+}
+
+.miwa-scene-choices button:hover:enabled {
+  background: #ffffff2a;
+}
+
+.miwa-scene-choices button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.miwa-dir {
+  border: 1px solid #2b9a66;
+  border-radius: 10px;
+  background: #f2fff8;
+  color: #214a34;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px 10px;
+}
+
+.miwa-dir.up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.miwa-dir.left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.miwa-dir.down {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.miwa-dir.right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.miwa-dash-btn {
+  margin-top: 8px;
+}
+
+.miwa-controls button {
+  border: 1px solid #2b9a66;
+  border-radius: 10px;
+  background: #f2fff8;
+  color: #214a34;
+  padding: 8px 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.miwa-controls button:hover:enabled {
+  background: #d6f6e3;
+}
+
+.miwa-dir:hover:enabled {
+  background: #d6f6e3;
+}
+
+.miwa-controls button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.miwa-log {
+  margin-top: 14px;
+  color: #31453d;
+}
+
+.miwa-result {
+  margin-top: 8px;
+  color: #274f39;
+}
+
+@media (max-width: 640px) {
+  .miwa-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .miwa-scene-choices {
+    width: min(92vw, 420px);
+    top: 10px;
+    padding: 4px;
+  }
+}
