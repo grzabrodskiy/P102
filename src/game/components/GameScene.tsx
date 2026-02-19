@@ -16,7 +16,6 @@ type GameSceneProps = {
   activePowerUp: PowerUp | null;
   status: Status;
   onAction: (action: Action) => void;
-  onDash: () => void;
   onSetMovement: (direction: Direction, pressed: boolean) => void;
   onClearMovement: () => void;
 };
@@ -57,7 +56,6 @@ export function GameScene({
   activePowerUp,
   status,
   onAction,
-  onDash,
   onSetMovement,
   onClearMovement
 }: GameSceneProps) {
@@ -117,11 +115,6 @@ export function GameScene({
       if (direction) {
         event.preventDefault();
         onSetMovement(direction, true);
-        return;
-      }
-      if (event.code === "Space" || event.key === " ") {
-        event.preventDefault();
-        onDash();
       }
     }
 
@@ -145,7 +138,7 @@ export function GameScene({
       window.removeEventListener("keyup", onWindowKeyUp);
       window.removeEventListener("blur", onWindowBlur);
     };
-  }, [onClearMovement, onDash, onSetMovement]);
+  }, [onClearMovement, onSetMovement]);
 
   return (
     <div className="miwa-scene-shell">
@@ -157,7 +150,7 @@ export function GameScene({
         onBlur={onClearMovement}
         role="application"
         tabIndex={0}
-        aria-label="Miwa game scene. Use A/D or left/right to move, space to dash."
+        aria-label="Miwa game scene. Use A/D or left/right arrows to pull Miwa."
       />
       {activeDistraction ? (
         <div className="miwa-scene-choices" aria-label="Situation choices">
@@ -168,7 +161,6 @@ export function GameScene({
           ))}
         </div>
       ) : null}
-      <p className="miwa-scene-help">Move only forward/backward with A/D or Left/Right. Press Space to dash.</p>
     </div>
   );
 }

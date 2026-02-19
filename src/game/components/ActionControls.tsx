@@ -2,19 +2,12 @@ type Direction = "left" | "right";
 
 type ActionControlsProps = {
   canPlay: boolean;
-  onDash: () => void;
   onSetMovement: (direction: Direction, pressed: boolean) => void;
   onClearMovement: () => void;
   onRestart: () => void;
 };
 
-export function ActionControls({
-  canPlay,
-  onDash,
-  onSetMovement,
-  onClearMovement,
-  onRestart
-}: ActionControlsProps) {
+export function ActionControls({ canPlay, onSetMovement, onClearMovement, onRestart }: ActionControlsProps) {
   function movementHandlers(direction: Direction) {
     return {
       onMouseDown: () => canPlay && onSetMovement(direction, true),
@@ -37,9 +30,6 @@ export function ActionControls({
             Forward →
           </button>
         </div>
-        <button onClick={onDash} disabled={!canPlay} className="miwa-dash-btn">
-          Dash (Space)
-        </button>
       </div>
 
       <div className="miwa-controls">

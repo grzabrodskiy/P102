@@ -146,14 +146,16 @@ function randomDogSize(): DogSize {
 
 function buildDogWalkDistraction(): Distraction {
   const dogSize = randomDogSize();
+  const dogDirection: CatDirection = chance(0.5) ? "same" : "opposite";
   const expectedIntent = dogSize === "large" ? "runAway" : "followDog";
   const intent = oppositeBehavior(expectedIntent, expectedIntent === "runAway" ? "followDog" : "runAway");
 
   const sizeText = dogSize === "small" ? "small" : dogSize === "medium" ? "medium" : "large";
+  const directionText = dogDirection === "same" ? "same direction" : "opposite direction";
   const text =
     intent === "followDog"
-      ? `A ${sizeText} dog passes by. Miwa wants to go the same direction as it.`
-      : `A ${sizeText} dog passes by. Miwa wants to run away from it.`;
+      ? `A ${sizeText} dog walks ${directionText}. Miwa wants to go socialize, then maybe follow it.`
+      : `A ${sizeText} dog walks ${directionText}. Miwa freezes, then keeps glancing toward it.`;
 
   const options =
     intent === "followDog"
@@ -240,22 +242,22 @@ function buildDogWalkDistraction(): Distraction {
     options,
     visual: {
       kind: "dogWalk",
-      dogSize
+      dogSize,
+      dogDirection
     }
   };
 }
 
 function buildRainDistraction(): Distraction {
-  const expectedIntent: RainIntent = chance(0.5) ? "stay" : "tree";
-  const rainIntent = oppositeBehavior<RainIntent>(expectedIntent, expectedIntent === "stay" ? "tree" : "stay");
+  const rainIntent: RainIntent = chance(0.5) ? "stop" : "home";
 
   const text =
-    rainIntent === "stay"
-      ? "Rain starts suddenly. Miwa wants to stay in place and wait it out."
-      : "Rain starts suddenly. Miwa tries to take cover under a tree.";
+    rainIntent === "stop"
+      ? "Rain starts suddenly. Miwa wants to stop and wait."
+      : "Rain starts suddenly. Miwa wants to go back home.";
 
   const options =
-    rainIntent === "stay"
+    rainIntent === "stop"
       ? [
           option(
             "rain_wait",

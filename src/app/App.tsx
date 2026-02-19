@@ -1,6 +1,4 @@
-import { ActionControls } from "../game/components/ActionControls";
 import { EventPanel } from "../game/components/EventPanel";
-import { GameResult } from "../game/components/GameResult";
 import { GameScene } from "../game/components/GameScene";
 import { GameStats } from "../game/components/GameStats";
 import { ProgressBar } from "../game/components/ProgressBar";
@@ -13,8 +11,6 @@ export default function App() {
   return (
     <main className="miwa-page">
       <section className="miwa-card">
-        <h1>Miwa</h1>
-        <p className="miwa-subtitle">Shiba adventure game - Level 1: Go to the park</p>
         <GameScene
           canPlay={game.canPlay}
           progressPct={game.progressPct}
@@ -26,29 +22,30 @@ export default function App() {
           activePowerUp={game.activePowerUp}
           status={game.status}
           onAction={game.chooseAction}
-          onDash={game.dash}
           onSetMovement={game.setMovement}
           onClearMovement={game.clearMovement}
         />
-
-        <GameStats
-          timeLeft={game.timeLeft}
-          score={game.score}
-          progressPct={game.progressPct}
-          stubbornness={game.stubbornness}
-        />
-        <ProgressBar progressPct={game.progressPct} />
-        <EventPanel activeDistraction={game.activeDistraction} activePowerUp={game.activePowerUp} />
-        <ActionControls
-          canPlay={game.canPlay}
-          onDash={game.dash}
-          onSetMovement={game.setMovement}
-          onClearMovement={game.clearMovement}
-          onRestart={game.restart}
-        />
-
-        <p className="miwa-log">{game.log}</p>
-        <GameResult status={game.status} />
+        <div className="miwa-overlay-top">
+          <h1>Miwa</h1>
+          <p className="miwa-subtitle">Shiba adventure game - Level 1: Go to the park</p>
+          <div className="miwa-top-hud">
+            <GameStats
+              timeLeft={game.timeLeft}
+              score={game.score}
+              progressPct={game.progressPct}
+              stubbornness={game.stubbornness}
+              shibaSpeed={game.shibaSpeed}
+              shibaDirection={game.shibaDirection}
+              humanPullSpeed={game.humanPullSpeed}
+              shibaVelocityFactor={game.shibaVelocityFactor}
+            />
+            <EventPanel activeDistraction={game.activeDistraction} activePowerUp={game.activePowerUp} />
+          </div>
+          {game.flowMessage ? <p className="miwa-flow-message">{game.flowMessage}</p> : null}
+        </div>
+        <div className="miwa-overlay-bottom">
+          <ProgressBar progressPct={game.progressPct} />
+        </div>
       </section>
     </main>
   );

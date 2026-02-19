@@ -3,8 +3,9 @@ export type Status = "playing" | "won" | "lost";
 export type PowerUpId = "treatBag" | "speedBoost" | "timeBonus";
 export type CatDirection = "same" | "opposite";
 export type DogSize = "small" | "medium" | "large";
-export type RainIntent = "stay" | "tree";
+export type RainIntent = "stop" | "home";
 export type ChaseDirection = "forward" | "backward" | "none";
+export type FactorSource = "external" | "internal";
 
 export type OutcomeEffects = {
   progress?: number;
@@ -33,6 +34,7 @@ export type Distraction = {
     catDirection?: CatDirection;
     chaseDirection?: ChaseDirection;
     dogSize?: DogSize;
+    dogDirection?: CatDirection;
     rainIntent?: RainIntent;
   };
 };
@@ -41,6 +43,11 @@ export type CatActor = {
   x: number;
   y: number;
   vx: number;
+};
+
+export type VelocityFactor = {
+  source: FactorSource;
+  label: string;
 };
 
 export type PowerUp = {

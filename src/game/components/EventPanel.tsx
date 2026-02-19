@@ -9,20 +9,14 @@ type EventPanelProps = {
 export function EventPanel({ activeDistraction, activePowerUp }: EventPanelProps) {
   return (
     <div className="miwa-event">
-      {activeDistraction ? (
-        <p>
-          <strong>Situation:</strong> {activeDistraction.text}
-        </p>
-      ) : (
-        <p>No distractions right now. Keep moving.</p>
-      )}
-      {activePowerUp ? (
-        <p>
-          <strong>Power-up:</strong> {POWER_UPS[activePowerUp.id].title} ahead.
-        </p>
-      ) : (
-        <p>No power-up visible right now.</p>
-      )}
+      <div className="miwa-event-row">
+        <span className="miwa-event-tag">Situation</span>
+        <p>{activeDistraction ? activeDistraction.text : "No distractions right now. Keep moving."}</p>
+      </div>
+      <div className="miwa-event-row">
+        <span className="miwa-event-tag power">Power-up</span>
+        <p>{activePowerUp ? `${POWER_UPS[activePowerUp.id].title} ahead.` : "No power-up visible right now."}</p>
+      </div>
     </div>
   );
 }

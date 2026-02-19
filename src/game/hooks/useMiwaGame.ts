@@ -13,6 +13,10 @@ export function useMiwaGame() {
   const canPlay = state.status === "playing";
   const progressPct = useMemo(() => clampMax(Math.round(state.progress), 100), [state.progress]);
   const timeLeft = useMemo(() => Math.max(0, Math.ceil(state.timeLeftMs / 1000)), [state.timeLeftMs]);
+  const shibaDirection = useMemo<"left" | "right">(
+    () => (state.shibaVelocity >= 0 ? "right" : "left"),
+    [state.shibaVelocity]
+  );
 
   useEffect(() => {
     if (!canPlay) return;
@@ -54,10 +58,15 @@ export function useMiwaGame() {
     playerY: Math.round(state.playerY),
     progressPct,
     score: Math.round(state.score),
+    shibaDirection,
+    shibaSpeed: Math.round(Math.abs(state.shibaVelocity)),
+    shibaVelocityFactor: state.velocityFactor,
+    flowMessage: state.flowMessage,
     restart,
     setMovement,
     status: state.status,
     stubbornness: Math.round(state.stubbornness),
-    timeLeft
+    timeLeft,
+    humanPullSpeed: Math.round(state.humanPullSpeed)
   };
 }

@@ -201,13 +201,45 @@ function drawAnimalLeg(ctx: CanvasRenderingContext2D, x: number, y: number) {
 }
 
 function drawTreatIcon(ctx: CanvasRenderingContext2D) {
-  ctx.fillStyle = "#ce5b45";
-  ctx.fillRect(-9, -6, 18, 14);
-  ctx.fillStyle = "#f9e7cc";
-  ctx.beginPath();
-  ctx.arc(-10, 1, 4.5, 0, Math.PI * 2);
-  ctx.arc(10, 1, 4.5, 0, Math.PI * 2);
+  drawRoundedRect(ctx, -12, -13, 24, 28, 6);
+  const bag = ctx.createLinearGradient(-12, -13, -12, 15);
+  bag.addColorStop(0, "#fff5c2");
+  bag.addColorStop(1, "#efd885");
+  ctx.fillStyle = bag;
   ctx.fill();
+  ctx.strokeStyle = "#bda24b";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.fillStyle = "#c59e57";
+  ctx.fillRect(-9, -11, 18, 3);
+
+  drawRoundedRect(ctx, -9, -6, 18, 12, 4);
+  const label = ctx.createLinearGradient(-9, -6, -9, 6);
+  label.addColorStop(0, "#cc5a42");
+  label.addColorStop(1, "#a63f2e");
+  ctx.fillStyle = label;
+  ctx.fill();
+
+  ctx.strokeStyle = "#ffffffb8";
+  ctx.lineWidth = 1.4;
+  ctx.stroke();
+
+  ctx.fillStyle = "#f8e9c8";
+  ctx.beginPath();
+  ctx.arc(-11, 0, 4.2, 0, Math.PI * 2);
+  ctx.arc(11, 0, 4.2, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#f7f1dd";
+  ctx.beginPath();
+  ctx.ellipse(-2.5, 0.5, 2.1, 1.5, 0.45, 0, Math.PI * 2);
+  ctx.ellipse(0.4, -0.2, 2.2, 1.6, -0.1, 0, Math.PI * 2);
+  ctx.ellipse(3.3, 0.6, 1.9, 1.4, 0.7, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#ffffff88";
+  ctx.fillRect(-7, -9.5, 5.5, 1.2);
 }
 
 function drawRoundedRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number) {

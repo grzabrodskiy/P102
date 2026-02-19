@@ -1,8 +1,7 @@
 .miwa-page {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 18px;
+  height: 100vh;
+  display: block;
+  padding: 0;
   background:
     radial-gradient(circle at 12% 18%, #ffffff 0%, #ffffff00 38%),
     radial-gradient(circle at 88% 80%, #dbffea 0%, #dbffea00 44%),
@@ -10,39 +9,100 @@
 }
 
 .miwa-card {
-  width: min(1320px, 100%);
+  width: 100vw;
+  height: 100vh;
   background: linear-gradient(180deg, #ffffffef 0%, #f3fff7eb 100%);
   backdrop-filter: blur(6px);
-  border: 1px solid #9cc7b1;
-  border-radius: 16px;
-  padding: 22px;
-  box-shadow: 0 24px 64px -32px #2e6a48;
+  border: 0;
+  border-radius: 0;
+  padding: 10px 12px 12px;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
 }
 
 .miwa-card h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.05rem;
+  font-family: "Trebuchet MS", "Avenir Next", "Gill Sans", sans-serif;
+  letter-spacing: 0.02em;
 }
 
 .miwa-subtitle {
+  margin: 2px 0 0;
+  color: #274638;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.miwa-top-hud {
   margin-top: 4px;
-  color: #4e5e57;
+  display: grid;
+  gap: 6px;
+}
+
+.miwa-overlay-top {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  right: 8px;
+  z-index: 20;
+  pointer-events: none;
+  text-shadow: 0 1px 0 #ffffff9e;
+}
+
+.miwa-overlay-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  pointer-events: none;
+  padding: 0 8px max(2px, env(safe-area-inset-bottom));
+}
+
+.miwa-overlay-top h1,
+.miwa-overlay-top .miwa-subtitle {
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f4fff8b8;
+  border: 0;
+  box-shadow: 0 6px 18px -14px #1d4531;
+}
+
+.miwa-flow-message {
+  margin: 5px 0 0;
+  padding: 4px 10px;
+  display: inline-block;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #d7ffea96, #ecfff5ab);
+  color: #11422f;
+  font-weight: 700;
+  font-size: 0.74rem;
+  box-shadow: 0 8px 24px -16px #144a34;
 }
 
 .miwa-scene-shell {
   position: relative;
-  margin-top: 14px;
+  margin-top: 0;
   background: linear-gradient(135deg, #f8fffa, #e5f5ec);
-  border: 1px solid #b4dbc7;
+  border: 0;
   border-radius: 14px;
-  padding: 12px;
+  padding: 8px 8px 26px;
   box-shadow: inset 0 1px 0 #ffffffcc;
+  flex: 1;
+  min-height: 0;
+  display: flex;
 }
 
 .miwa-scene {
   width: 100%;
-  height: auto;
-  border: 1px solid #8fbfa8;
+  height: 100%;
+  border: 0;
   border-radius: 12px;
   background: #e9f8f1;
   display: block;
@@ -55,54 +115,346 @@
   box-shadow: 0 0 0 3px #8fd5ad, inset 0 0 0 1px #ffffffaa;
 }
 
-.miwa-scene-help {
-  margin: 8px 2px 0;
-  color: #3f5d52;
-  font-size: 0.96rem;
-  font-weight: 600;
-}
-
 .miwa-stats {
-  margin-top: 16px;
+  margin-top: 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 5px;
 }
 
-.miwa-stats > div {
-  background: #ffffff1a;
-  backdrop-filter: blur(4px);
-  border: 1px solid #ffffff66;
-  border-radius: 10px;
-  padding: 10px;
+.miwa-stat-card {
+  background: transparent;
+  backdrop-filter: none;
+  border: 0;
+  border-radius: 11px;
+  padding: 5px 6px;
   display: flex;
   flex-direction: column;
+  gap: 2px;
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.miwa-stat-card::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -24px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: transparent;
+  filter: blur(1px);
+}
+
+.miwa-stat-card strong {
+  color: #1f533c;
+  font-size: 0.57rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+.miwa-stat-card span {
+  color: #103526;
+  font-size: 0.84rem;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+.miwa-stat-card.theme-time,
+.miwa-stat-card.theme-score,
+.miwa-stat-card.theme-progress,
+.miwa-stat-card.theme-mood {
+  min-height: 50px;
+}
+
+.miwa-metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 4px;
 }
 
-.miwa-progress-bar {
-  margin-top: 14px;
-  width: 100%;
-  height: 12px;
+.miwa-dir-chip {
+  border: 0;
   border-radius: 999px;
-  background: #ffffff22;
-  border: 1px solid #ffffff66;
+  padding: 1px 7px;
+  font-size: 0.56rem;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: transparent;
+  box-shadow: none;
+  position: relative;
+  z-index: 1;
+}
+
+.miwa-dir-chip.left {
+  color: #336885;
+}
+
+.miwa-dir-chip.right {
+  color: #2d6f48;
+}
+
+.miwa-dir-chip.human {
+  color: #1f7db8;
+}
+
+.miwa-mini-chip {
+  width: fit-content;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: #2a684a;
+  padding: 1px 6px;
+  font-size: 0.54rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.miwa-mini-chip.legend {
+  color: #8f460f;
+  background: transparent;
+}
+
+.miwa-mini-chip.hot {
+  color: #96520c;
+  background: transparent;
+}
+
+.miwa-mini-chip.warm {
+  color: #2b6848;
+  background: transparent;
+}
+
+.miwa-mini-chip.calm {
+  color: #206e95;
+  background: transparent;
+}
+
+.miwa-mini-chip.bright {
+  color: #116e48;
+  background: transparent;
+}
+
+.miwa-mini-chip.mood {
+  color: #17668e;
+  background: transparent;
+}
+
+.miwa-meter {
+  margin-top: 2px;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  border: 0;
+  background: #ebfdf35e;
   overflow: hidden;
+  box-shadow: inset 0 1px 2px #0000002b, 0 2px 8px -6px #0f5136;
+  position: relative;
+  z-index: 1;
+}
+
+.miwa-meter.mini {
+  height: 6px;
+}
+
+.miwa-meter-fill {
+  height: 100%;
+  transition: width 0.2s ease;
+  position: relative;
+}
+
+.miwa-meter-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, #ffffff00 0%, #ffffff80 45%, #ffffff00 85%);
+  transform: translateX(-100%);
+  animation: miwa-shimmer 1.5s linear infinite;
+}
+
+.miwa-meter-fill.shiba {
+  background: linear-gradient(90deg, #13814f, #2fd383);
+  box-shadow: 0 0 12px #2bc67e99;
+}
+
+.miwa-meter-fill.human {
+  background: linear-gradient(90deg, #0f6cab, #47c5ff);
+  box-shadow: 0 0 12px #40befe80;
+}
+
+.miwa-meter-fill.time {
+  background: linear-gradient(90deg, #f4b24c, #ffd36f);
+}
+
+.miwa-meter-fill.mood {
+  background: linear-gradient(90deg, #5da6d3, #2090d0);
+}
+
+.miwa-stat-factor {
+  gap: 3px;
+}
+
+.miwa-factor-chip {
+  width: fit-content;
+  border: 0;
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 0.53rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+.miwa-factor-chip.external {
+  color: #155634;
+  background: transparent;
+}
+
+.miwa-factor-chip.internal {
+  color: #12557b;
+  background: transparent;
+}
+
+.miwa-stat-balance {
+  grid-column: span 2;
+}
+
+.miwa-balance-track {
+  margin-top: 2px;
+  width: 100%;
+  height: 8px;
+  border: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  display: flex;
+  background: #ebfdf35e;
+  box-shadow: inset 0 1px 2px #00000021;
+}
+
+.miwa-balance-fill {
+  height: 100%;
+  transition: width 0.2s ease;
+}
+
+.miwa-balance-fill.shiba {
+  background: linear-gradient(90deg, #13814f, #2fd383);
+}
+
+.miwa-balance-fill.human {
+  background: linear-gradient(90deg, #0f6cab, #47c5ff);
+}
+
+.miwa-progress-wrap {
+  margin-top: 0;
+  padding: 5px 6px 6px;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.miwa-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.miwa-progress-meta strong {
+  color: #1f533c;
+  font-size: 0.57rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.miwa-progress-meta span {
+  color: #0f3125;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.miwa-progress-bar {
+  width: 100%;
+  height: 9px;
+  border-radius: 999px;
+  background: #ebfdf35e;
+  border: 0;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px #00000021;
+  position: relative;
 }
 
 .miwa-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #2b9a66, #74cc8f);
+  background: linear-gradient(90deg, #11a865, #31d88a 48%, #84ffc1);
   transition: width 0.2s ease;
+  position: relative;
+}
+
+.miwa-progress-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, #ffffff00 0%, #ffffff78 50%, #ffffff00 95%);
+  transform: translateX(-100%);
+  animation: miwa-shimmer 1.4s linear infinite;
 }
 
 .miwa-event {
-  margin-top: 16px;
-  min-height: 52px;
-  background: #fff8db;
-  border: 1px solid #e9d997;
-  border-radius: 10px;
-  padding: 10px 12px;
+  margin-top: 0;
+  min-height: 40px;
+  background: transparent;
+  border: 0;
+  border-radius: 11px;
+  padding: 5px 6px 6px;
+  display: grid;
+  gap: 3px;
+  box-shadow: none;
+}
+
+.miwa-event-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.miwa-event-tag {
+  flex-shrink: 0;
+  margin-top: 1px;
+  border: 0;
+  background: transparent;
+  color: #1f6a47;
+  border-radius: 999px;
+  padding: 1px 5px;
+  font-size: 0.54rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.miwa-event-tag.power {
+  border: 0;
+  background: transparent;
+  color: #1f5f8f;
+}
+
+.miwa-event p {
+  margin: 0;
+  color: #184433;
+  font-size: 0.72rem;
+  line-height: 1.15;
+  font-weight: 700;
 }
 
 .miwa-controls {
@@ -252,12 +604,23 @@
 
 @media (max-width: 640px) {
   .miwa-stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .miwa-stat-balance {
+    grid-column: span 2;
   }
 
   .miwa-scene-choices {
     width: min(92vw, 420px);
     top: 10px;
     padding: 4px;
+  }
+}
+
+@keyframes miwa-shimmer {
+  to {
+    transform: translateX(100%);
   }
 }
